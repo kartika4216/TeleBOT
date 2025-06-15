@@ -717,4 +717,8 @@ setInterval(function () {
     } catch (e) {
     }
 }, 5000)
-appServer.listen(process.env.PORT || 8999);
+// ✅ Jalankan server — hanya SATU .listen()
+const PORT = process.env.PORT || 3000;
+appServer.listen(PORT, () => {
+  console.log(`✅ Server berjalan di port ${PORT}`);
+});
