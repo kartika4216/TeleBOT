@@ -718,3 +718,8 @@ setInterval(function () {
     }
 }, 5000)
 appServer.listen(process.env.PORT || 8999);
+// ✅ Jalankan server
+const PORT = process.env.PORT || 3000;
+appServer.listen(PORT, () => {
+  console.log(`✅ Server berjalan di port ${PORT}`);
+});
