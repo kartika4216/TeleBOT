@@ -1,0 +1,5 @@
+  { 
+  "host": "https://telebot-production-45ec.up.railway.app/",
+  "socket": "wss://telebot-production-45ec.up.railway.app/",
+  "webView": "https://youtube.com/" 
+}
