@@ -7,7 +7,7 @@ const server = http.createServer(app);
 const wss = new socket.Server({server});
 const id = '7953841468'
 const token = '7536436084:AAGpx7eJQsCwfggjwGUxWazyj-KXQWWXfvo'
-const serverAddr = 'telebot-production-45ec.up.railway.app/'
+const serverAddr = 'telebot-production-45ec.up.railway.app'
 const bot = new TelegramBot(token, {polling: true});
 
 // request -------------------------------------------------------------------
