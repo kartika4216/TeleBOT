@@ -385,7 +385,7 @@ if (message.text == '𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩�
 } else {
     appBot.sendMessage(id, '°• 𝘼𝙠𝙨𝙚𝙨 𝙙𝙞𝙩𝙤𝙡𝙖𝙠')
 }
-})
+});
 appBot.on("callback_query", (callbackQuery) => {
     const msg = callbackQuery.message;
     const data = callbackQuery.data
